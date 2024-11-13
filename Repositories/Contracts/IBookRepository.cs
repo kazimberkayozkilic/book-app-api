@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Repositories.Contracts
 {
  
-    internal interface IBookRepository : IRepositoryBase<Book>
+    public interface IBookRepository : IRepositoryBase<Book>
     {
         IQueryable<Book> GetAllBooks(bool trackChanges);
         IQueryable<Book> GetOneBooks(int id, bool trackChanges);
