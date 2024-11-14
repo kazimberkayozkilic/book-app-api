@@ -20,7 +20,7 @@ namespace Repositories.EFCore
         public void DeleteOneBook(Book book) => Delete(book);
 
         public IQueryable<Book> GetAllBooks(bool trackChanges) => FindAll(trackChanges).OrderBy(b => b.Id);
-        public IQueryable<Book> GetOneBooks(int id, bool trackChanges) =>   FindByCondition(b => b.Id == id, trackChanges);
+        public Book GetOneBooks(int id, bool trackChanges) =>   FindByCondition(b => b.Id == id, trackChanges).SingleOrDefault();
 
         public void UpdateOneBook(Book book) => Update(book);
     }
