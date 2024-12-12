@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Repositories.Contracts;
 using Repositories.EFCore;
+using Services.Contracts;
 
 namespace WebApi.Controllers
 {
@@ -9,9 +10,9 @@ namespace WebApi.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private readonly IRepositoryManager _manager;
+        private readonly IServiceManager _manager;
 
-        public BooksController(IRepositoryManager manager)
+        public BooksController(IServiceManager manager)
         {
             _manager = manager;
         }
@@ -21,7 +22,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                var books = _manager.Book.GetAllBooks(false);
+                var books = _manager.BookService.GetAllBooks(false);
                 return Ok(books);
             }
             catch (Exception ex)
@@ -29,7 +30,7 @@ namespace WebApi.Controllers
 
                 throw new Exception(ex.Message);
             }
-            
+
         }
 
         [HttpGet("{id:int}")]
@@ -37,7 +38,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                var book = _manager.Book.GetOneBooks(id, false); 
+                var book = _manager.BookService.GetOneBookById(id, false);
 
                 if (book == null)
                 {
@@ -51,7 +52,7 @@ namespace WebApi.Controllers
 
                 throw new Exception(ex.Message);
             }
-            
+
         }
 
         [HttpPost]
@@ -63,8 +64,8 @@ namespace WebApi.Controllers
 
                     return BadRequest();
 
-_manager.Book.CreateOneBook(book);
-                _manager.Save();
+                _manager.BookService.CreateOneBook(book);
+
                 return Ok(book);
             }
             catch (Exception ex)
@@ -79,28 +80,20 @@ _manager.Book.CreateOneBook(book);
         {
             try
             {
-                var entity = _manager.Book.GetOneBooks(id, true);
-
-                if (entity == null)
-                {
-                    return NotFound();
-                }
-                if (id != book.Id)
-                {
+                if (book is null)
                     return BadRequest();
-                }
-                entity.Title = book.Title;
-                entity.Price = book.Price;
-                _manager.Save();
-                return Ok(book);
+
+                _manager.BookService.UpdateOneBook(id, book, false);
+
+                return NoContent();//204
 
             }
-            catch ( Exception ex)
+            catch (Exception ex)
             {
 
                 throw new Exception(ex.Message);
             }
-            
+
 
         }
 
@@ -109,21 +102,15 @@ _manager.Book.CreateOneBook(book);
         {
             try
             {
-                var entity = _manager.Book.GetOneBooks(id, false);
-                if (entity == null)
-                {
-                    return NotFound();
-                }
-                _manager.Book.DeleteOneBook(entity);
-                _manager.Save();
-                return Ok(entity);
+                _manager.BookService.Delete(id, false);
+                return NoContent(); //204
             }
             catch (Exception ex)
             {
 
                 throw new Exception(ex.Message);
             }
-            
+
 
         }
 
