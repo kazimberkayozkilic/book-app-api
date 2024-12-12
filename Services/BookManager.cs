@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Repositories.Contracts;
 using Services.Contracts;
 using System;
@@ -64,4 +65,5 @@ namespace Services
             _manager.Save();
         }
     }
+    
 }
