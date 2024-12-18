@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using Repositories.EFCore;
+using Services.Contracts;
 using WebApi.Extensions;
 
 internal class Program
@@ -21,18 +22,23 @@ internal class Program
         builder.Services.ConfigureSqlContext(builder.Configuration);
         builder.Services.ConfigureServiceManager();
         builder.Services.ConfigureLoggerService();
-
-
         builder.Services.ConfigureRepositoryManager();
 
 
         var app = builder.Build();
 
+        var logger = app.Services.GetRequiredService<ILoggerService>();
+        app.ConfigureExceptionHandler(logger);
 
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
             app.UseSwaggerUI();
+        }
+
+        if (app.Environment.IsProduction())
+        {
+            app.UseHsts();
         }
 
         app.UseHttpsRedirection();

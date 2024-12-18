@@ -1,4 +1,5 @@
-﻿using Entities.Models;
+﻿using Entities.Exceptions;
+using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Repositories.Contracts;
 using Services.Contracts;
@@ -31,15 +32,12 @@ namespace Services
 
         public void Delete(int id, bool trackChanges)
         {
-           //check entity
+            //check entity
             var entity = _manager.Book.GetOneBookById(id, trackChanges);
             if (entity == null)
             {
-                string message = $"Book with id: {id} doesn't exist in the database.";
-                _logger.LogInfo(message);
-                throw new ArgumentException(message);
+                throw new BookNotFoundException(id);
             }
-
             _manager.Book.DeleteOneBook(entity);
             _manager.Save();
         }
@@ -51,22 +49,25 @@ namespace Services
 
         public Book GetOneBookById(int id, bool trackChanges)
         {
-            return _manager.Book.GetOneBookById(id, trackChanges);
+            var book = _manager.Book.GetOneBookById(id, trackChanges);
+            if (book is null)
+            {
+                throw new BookNotFoundException(id);
+            }
+            return book;
         }
 
         public void UpdateOneBook(int id, Book book, bool trackChanges)
         {
             //check entity
-           var entity = _manager.Book.GetOneBookById(id, trackChanges);
-            if (entity == null)
+            var entity = _manager.Book.GetOneBookById(id, trackChanges);
+            if (entity is null)
             {
-                string message = $"Book with id: {id} doesn't exist in the database.";
-                _logger.LogInfo(message);
-                throw new ArgumentException(message);
+                throw new BookNotFoundException(id);
             }
             //check params
             if (book is null)
-            throw new ArgumentNullException(nameof(book));
+                throw new ArgumentNullException(nameof(book));
 
             entity.Title = book.Title;
             entity.Price = book.Price;
@@ -74,5 +75,5 @@ namespace Services
             _manager.Save();
         }
     }
-    
+
 }
