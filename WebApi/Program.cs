@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using NLog;
 using Repositories.EFCore;
 using WebApi.Extensions;
 
@@ -8,6 +9,7 @@ internal class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
 
         builder.Services.AddControllers()
@@ -18,6 +20,7 @@ internal class Program
         builder.Services.AddSwaggerGen();
         builder.Services.ConfigureSqlContext(builder.Configuration);
         builder.Services.ConfigureServiceManager();
+        builder.Services.ConfigureLoggerService();
 
 
         builder.Services.ConfigureRepositoryManager();
