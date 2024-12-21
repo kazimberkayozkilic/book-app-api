@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities.DataTransferObjects
 {
-    public record BookDtoForUpdate(int Id, string Title, string Author, decimal Price);
-    
+    public record BookDtoForUpdate(int Id, string Title, decimal Price);
+
+
 }
