@@ -18,12 +18,12 @@ namespace Repositories.EFCore
             _context = context;
             _bookRepository = new Lazy<IBookRepository>(() => new BookRepository(_context));
         }
-        
+
         public IBookRepository Book => _bookRepository.Value;
 
-        public void Save()
+        public async Task SaveAsync()
         {
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }
