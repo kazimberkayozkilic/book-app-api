@@ -14,14 +14,14 @@ internal class Program
         LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
 
-        builder.Services.AddControllers(config =>
+        _ = builder.Services.AddControllers(config =>
         {
             config.RespectBrowserAcceptHeader = true;
             config.ReturnHttpNotAcceptable = true;
         })
             .AddCustomCsvFormatter()
             .AddXmlDataContractSerializerFormatters()
-            .AddApplicationPart(typeof(Presentation.AssemblyReference)
+            .AddApplicationPart(typeof(Presentation.AssemblyReferance)
             .Assembly).AddNewtonsoftJson();
 
         builder.Services.Configure<ApiBehaviorOptions>(options =>

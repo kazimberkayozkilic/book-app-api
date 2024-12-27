@@ -57,7 +57,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateOneBook([FromRoute(Name = "id")] int id, [FromBody] BookDtoForUpdate bookDto)
+        public async Task<IActionResult> UpdateOneBookAsync([FromRoute(Name = "id")] int id, [FromBody] BookDtoForUpdate bookDto)
         {
 
             //if (bookDto is null)
@@ -76,7 +76,7 @@ namespace Presentation.Controllers
         }
 
         [HttpDelete("{id:int}")]
-        public async  Task<IActionResult> DeleteOneBook([FromRoute(Name = "id")] int id)
+        public async  Task<IActionResult> DeleteOneBookAsync([FromRoute(Name = "id")] int id)
         {
             _manager.BookService.DeleteAsync(id, false);
             return NoContent(); //204
