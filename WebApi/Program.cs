@@ -21,7 +21,7 @@ internal class Program
         })
             .AddCustomCsvFormatter()
             .AddXmlDataContractSerializerFormatters()
-            .AddApplicationPart(typeof(Presentation.AssemblyReferance)
+            .AddApplicationPart(typeof(Presentation.AssemblyReference)
             .Assembly).AddNewtonsoftJson();
 
         builder.Services.Configure<ApiBehaviorOptions>(options =>
