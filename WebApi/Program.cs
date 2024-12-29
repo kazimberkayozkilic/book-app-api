@@ -25,7 +25,7 @@ internal class Program
             .AddApplicationPart(typeof(Presentation.AssemblyReference)
             .Assembly).AddNewtonsoftJson();
 
-        builder.Services.AddScoped<ValidationFilterAttribute>();
+        
 
         builder.Services.Configure<ApiBehaviorOptions>(options =>
         {
