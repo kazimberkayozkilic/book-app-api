@@ -39,6 +39,7 @@ internal class Program
         builder.Services.ConfigureLoggerService();
         builder.Services.ConfigureRepositoryManager();
         builder.Services.AddAutoMapper(typeof(Program));
+        builder.Services.ConfigureActionFilter();
 
 
         var app = builder.Build();
