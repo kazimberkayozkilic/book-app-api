@@ -2,6 +2,7 @@
 using Entities.Exceptions;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
+using Presentation.ActionFilters;
 using Services.Contracts;
 using System;
 using System.Collections.Generic;
@@ -38,21 +39,13 @@ namespace Presentation.Controllers
 
         }
 
-
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPost]
         public async Task<IActionResult> CreateOneBookAsync([FromBody] BookDtoForInsertion bookDto)
         {
-
-            if (bookDto is null)
-
-                return BadRequest(); //400
-
-            if(!ModelState.IsValid)
-                return UnprocessableEntity(ModelState);
-
             var book = await _manager.BookService.CreateOneBookAsync(bookDto);
 
-            return StatusCode(201, book); //createdAtRoute()
+            return StatusCode(201, book);
 
         }
 
@@ -66,7 +59,7 @@ namespace Presentation.Controllers
             if (!ModelState.IsValid)
                 return UnprocessableEntity(ModelState);
 
-           await _manager.BookService.UpdateOneBookAsync(id, bookDto, false);
+            await _manager.BookService.UpdateOneBookAsync(id, bookDto, false);
 
             return NoContent();//204
 
@@ -76,7 +69,7 @@ namespace Presentation.Controllers
         }
 
         [HttpDelete("{id:int}")]
-        public async  Task<IActionResult> DeleteOneBookAsync([FromRoute(Name = "id")] int id)
+        public async Task<IActionResult> DeleteOneBookAsync([FromRoute(Name = "id")] int id)
         {
             _manager.BookService.DeleteAsync(id, false);
             return NoContent(); //204
