@@ -21,7 +21,13 @@ namespace Repositories.EFCore
 
         public void DeleteOneBook(Book book) => Delete(book);
 
-        public async Task<IEnumerable<Book>> GetAllBooksAsync(BookParameters bookParameters, bool trackChanges) => await FindAll(trackChanges).OrderBy(b => b.Id).Skip((bookParameters.PageNumber-1) * bookParameters.PageSize).Take(bookParameters.PageSize).ToListAsync();
+        public async Task<PagedList<Book>> GetAllBooksAsync(BookParameters bookParameters, bool trackChanges)
+        {
+            var Books = await FindAll(trackChanges).
+                 OrderBy(b => b.Id).ToListAsync();
+            return PagedList<Book>
+                .ToPagedList(Books, bookParameters.PageNumber, bookParameters.PageSize);
+        }
 
         public async Task<Book> GetOneBookByIdAsync(int id, bool trackChanges) => await FindByCondition(b => b.Id == id, trackChanges).SingleOrDefaultAsync();
 
