@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.EFCore
+namespace Repositories.EFCore.Extensions
 {
     public static class BookRepositoryExtensions
     {
-        public static IQueryable<Book> FilterBooks(this IQueryable<Book> books, 
+        public static IQueryable<Book> FilterBooks(this IQueryable<Book> books,
             uint MinPrice, uint MaxPrice) =>
             books.Where(book => book.Price >= MinPrice && book.Price <= MaxPrice);
     }
