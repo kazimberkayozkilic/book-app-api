@@ -40,6 +40,7 @@ internal class Program
         builder.Services.ConfigureRepositoryManager();
         builder.Services.AddAutoMapper(typeof(Program));
         builder.Services.ConfigureActionFilter();
+        builder.Services.ConfigureCors();
 
 
         var app = builder.Build();
@@ -59,6 +60,8 @@ internal class Program
         }
 
         app.UseHttpsRedirection();
+
+        app.UseCors("CorsPolicy");
 
         app.UseAuthorization();
 
