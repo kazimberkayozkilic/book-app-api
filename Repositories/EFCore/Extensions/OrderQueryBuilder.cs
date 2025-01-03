@@ -8,6 +8,9 @@ namespace Repositories.EFCore.Extensions
 {
     public static  class OrderQueryBuilder
     {
-
+        public static String CreateOrderQuery<T>(String orderByQueryString)
+        {
+           
+        }
     }
 }
