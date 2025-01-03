@@ -43,10 +43,15 @@ namespace Services
             await _manager.SaveAsync();
         }
 
-        public async Task<(IEnumerable<BookDto>, MetaData metaData)> GetAllBooksAsync(BookParameters bookParameters ,bool trackChanges)
+        public async Task<(IEnumerable<BookDto>, MetaData metaData)> GetAllBooksAsync(BookParameters bookParameters, bool trackChanges)
         {
+            if (!bookParameters.ValidPriceRange)
+            {
+                throw new PriceOutofRangeBadRequestException();
+            }
+
             var booksWithMetaData = await _manager.Book.GetAllBooksAsync(bookParameters, trackChanges);
-           var booksDto = _mapper.Map<IEnumerable<BookDto>>(booksWithMetaData);
+            var booksDto = _mapper.Map<IEnumerable<BookDto>>(booksWithMetaData);
             return (booksDto, booksWithMetaData.MetaData);
         }
 
