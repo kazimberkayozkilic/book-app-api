@@ -42,6 +42,7 @@ internal class Program
         builder.Services.ConfigureActionFilter();
         builder.Services.ConfigureCors();
         builder.Services.ConfigureDataShaper();
+        builder.Services.AddCustomMediTypes();
 
 
         var app = builder.Build();
