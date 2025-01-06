@@ -157,3 +157,9 @@
 2024-12-29 04:16:25.2232 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.4.2778. Product version: 5.3.4+73d83d3161d31288ca5c554cc50d27b6bed5f28b. GlobalAssemblyCache: False
 2024-12-29 04:16:25.2416 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\berkay\Desktop\Backend Çalışma\Net Core Btk\bsStoreApp\WebApi\nlog.config
 2024-12-29 04:16:25.2573 Info Configuration initialized.
+2025-01-05 02:58:58.0484 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-01-05 02:58:58.0784 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.4.2778. Product version: 5.3.4+73d83d3161d31288ca5c554cc50d27b6bed5f28b. GlobalAssemblyCache: False
+2025-01-05 02:58:58.0891 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\berkay\Desktop\Backend Çalışma\Net Core Btk\bsStoreApp\WebApi\nlog.config
+2025-01-05 02:58:58.0891 Info Configuration initialized.
+2025-01-05 03:07:20.4309 Info AppDomain Shutting down. LogFactory closing...
+2025-01-05 03:07:20.4438 Info LogFactory has been closed.
