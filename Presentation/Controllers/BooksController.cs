@@ -1,5 +1,6 @@
 ﻿using Entities.DataTransferObjects;
 using Entities.Exceptions;
+using Entities.LinkModels;
 using Entities.Models;
 using Entities.RequestFeatures;
 using Microsoft.AspNetCore.Mvc;
@@ -30,10 +31,15 @@ namespace Presentation.Controllers
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> GetAllBooksAsync([FromQuery]BookParameters bookParameters)
         {
-            var pagedResult = await _manager.BookService.GetAllBooksAsync(bookParameters, false);
+            var linkParameters = new LinkParameters()
+            {
+                BookParameters = bookParameters,
+                HttpContext = HttpContext
+            };
+            var result = await _manager.BookService.GetAllBooksAsync(linkParameters, false);
 
-            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedResult.metaData));
-            return Ok(pagedResult);
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(result.metaData));
+            return result.linkResponse.HasLinks ? Ok(result.linkResponse.LinkedEntities) : Ok(result.linkResponse.ShapedEntities);
         }
 
         [HttpGet("{id:int}")]
