@@ -39,7 +39,7 @@ namespace Services
             var bookDtoList = booksDto.ToList();
             for (int index = 0; index < bookDtoList.Count; index++)
             {
-                var bookLinks = CreateForBook(httpContext, bookDtoList[index].Id, fields);
+                var bookLinks = CreateForBook(httpContext, bookDtoList[index], fields);
                 shapedBooks[index].Add("Links", bookLinks);
             }
             var bookCollection = new LinkCollectionWrapper<Entity>();
@@ -47,12 +47,22 @@ namespace Services
             return new LinkResponse { HasLinks = true, LinkedEntities = bookCollection };
         }
 
-        private List<Link> CreateForBook(HttpContext httpContext, int ıd, string fields)
+        private List<Link> CreateForBook(HttpContext httpContext, BookDto bookDto, string fields)
         {
             var links = new List<Link>()
             {
-                new Link("a1","b1","c1"),
-                new Link("a2","b2","c2")
+                new Link()
+                {
+                    Href = $"/api/${httpContext.GetRouteData().Values["controller"].ToString().ToLower()}" + $"/{bookDto.Id}",
+                    Rel = "self",
+                    Method = "GET"
+                },
+                new Link()
+                {
+                    Href = $"/api/${httpContext.GetRouteData().Values["controller"].ToString().ToLower()}",
+                    Rel = "create",
+                    Method = "Post"
+                }
             };
             return links;
         }
