@@ -27,7 +27,8 @@ namespace Presentation.Controllers
             _manager = manager;
         }
 
-        [HttpGet]
+        [HttpHead]
+        [HttpGet (Name = "GetAllBooksAsync")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> GetAllBooksAsync([FromQuery]BookParameters bookParameters)
         {
