@@ -58,6 +58,7 @@ namespace WebApi.Extensions
                 if (systemTextJsonOutputFormatter is not null)
                 {
                     systemTextJsonOutputFormatter.SupportedMediaTypes.Add("application/vnd.BstoreApp.hateoas+json");
+                    systemTextJsonOutputFormatter.SupportedMediaTypes.Add("application/vnd.bsstore.apiroot+json");
                 }
 
                 var xmlOutputFormatter = config
@@ -66,6 +67,8 @@ namespace WebApi.Extensions
                 if (xmlOutputFormatter is not null)
                 {
                     xmlOutputFormatter.SupportedMediaTypes.Add("application/vnd.BstoreApp.hateoas+xml");
+
+                    xmlOutputFormatter.SupportedMediaTypes.Add("application/vnd.bsstore.apiroot+xml");
                 }
 
 
