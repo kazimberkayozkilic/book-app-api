@@ -47,6 +47,7 @@ internal class Program
         builder.Services.ConfigureDataShaper();
         builder.Services.AddCustomMediTypes();
         builder.Services.AddScoped<IBookLinks, BookLinks>();
+        builder.Services.ConfigureVersioning();
 
 
         var app = builder.Build();
