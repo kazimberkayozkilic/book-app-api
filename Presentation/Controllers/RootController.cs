@@ -41,7 +41,7 @@ namespace Presentation.Controllers
                     },
                     new Link()
                     {
-                        Href = _linkGenerator.GetUriByName(HttpContext, nameof(BooksController.GetAllBooksAsync), new {}),
+                        Href = _linkGenerator.GetUriByName(HttpContext, nameof(BooksController.CreateOneBookAsync), new {}),
                         Rel = "books",
                         Method = "POST"
                     }
