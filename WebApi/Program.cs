@@ -21,10 +21,12 @@ internal class Program
             config.RespectBrowserAcceptHeader = true;
             config.ReturnHttpNotAcceptable = true;
         })
-            .AddCustomCsvFormatter()   
-            .AddXmlDataContractSerializerFormatters() 
+            .AddCustomCsvFormatter()
+            .AddXmlDataContractSerializerFormatters()
             .AddApplicationPart(typeof(Presentation.AssemblyReference)
-            .Assembly).AddNewtonsoftJson();
+            .Assembly);
+         
+            //.AddNewtonsoftJson();
 
         
 
