@@ -18,5 +18,6 @@ namespace Services.Contracts
         Task<BookDto> CreateOneBookAsync(BookDtoForInsertion book);
         Task  UpdateOneBookAsync(int id,BookDtoForUpdate bookDto, bool trackChanges);
         Task DeleteAsync(int id, bool trackChanges);
+        Task<List<Book>> GetAllBooksAsync(bool trackChanges);
     }
 }
