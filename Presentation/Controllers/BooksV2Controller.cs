@@ -23,6 +23,7 @@ namespace Presentation.Controllers
         public async Task<IActionResult> GetAllBooksAsync()
         {
             var books = await _manager.BookService.GetAllBooksAsync(false);
+            var booksV2 = books.Select(b => new { b.Id, b.Title });
             return Ok(books);
         }
     }
