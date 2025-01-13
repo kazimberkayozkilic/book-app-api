@@ -48,6 +48,7 @@ internal class Program
         builder.Services.AddCustomMediTypes();
         builder.Services.AddScoped<IBookLinks, BookLinks>();
         builder.Services.ConfigureVersioning();
+        builder.Services.ConfigureResponseCaching();
 
 
         var app = builder.Build();
@@ -69,6 +70,8 @@ internal class Program
         app.UseHttpsRedirection();
 
         app.UseCors("CorsPolicy");
+        app.UseResponseCaching();
+
 
         app.UseAuthorization();
 
