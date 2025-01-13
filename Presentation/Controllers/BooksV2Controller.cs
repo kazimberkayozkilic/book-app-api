@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Presentation.Controllers
 {
-    [ApiVersion("2.0")]
+
+    //[ApiVersion("2.0", Deprecated = true)]
     [ApiController]
     [Route("api/books")]
     public class BooksV2Controller: ControllerBase
