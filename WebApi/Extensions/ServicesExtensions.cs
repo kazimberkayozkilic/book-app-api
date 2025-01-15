@@ -1,4 +1,5 @@
-﻿using Entities.DataTransferObjects;
+﻿using AspNetCoreRateLimit;
+using Entities.DataTransferObjects;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Versioning;
@@ -97,6 +98,29 @@ namespace WebApi.Extensions
         public static void ConfigureHttpCacheHeaders(this IServiceCollection services) =>
             services.AddHttpCacheHeaders();
 
+        public static void ConfigureRateLimitingOptions(this IServiceCollection services)
+        {
+            var rateLimitRules = new List<RateLimitRule>()
+            {
+                new RateLimitRule()
+                {
+                Endpoint = "*",
+                Period = "1m",
+                Limit = 3
+                }
+            };
 
+            services.Configure<IpRateLimitOptions>(opt => 
+            {
+                opt.GeneralRules = rateLimitRules; 
+            });
+
+            services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
+            services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
+            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+            services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
+        }
     }
+
 }
+
