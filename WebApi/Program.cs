@@ -20,16 +20,16 @@ internal class Program
         {
             config.RespectBrowserAcceptHeader = true;
             config.ReturnHttpNotAcceptable = true;
-            config.CacheProfiles.Add("5mins", new CacheProfile() { Duration = 300});
+            config.CacheProfiles.Add("5mins", new CacheProfile() { Duration = 300 });
         })
             .AddCustomCsvFormatter()
             .AddXmlDataContractSerializerFormatters()
             .AddApplicationPart(typeof(Presentation.AssemblyReference)
             .Assembly);
-         
-            //.AddNewtonsoftJson();
 
-        
+        //.AddNewtonsoftJson();
+
+
 
         builder.Services.Configure<ApiBehaviorOptions>(options =>
         {
@@ -51,7 +51,7 @@ internal class Program
         builder.Services.ConfigureVersioning();
         builder.Services.ConfigureResponseCaching();
         builder.Services.ConfigureHttpCacheHeaders();
-
+        builder.Services.AddMemoryCache();
 
         var app = builder.Build();
 
