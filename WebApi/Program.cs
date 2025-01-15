@@ -1,4 +1,6 @@
+using AspNetCoreRateLimit;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using Presentation.ActionFilters;
@@ -52,6 +54,8 @@ internal class Program
         builder.Services.ConfigureResponseCaching();
         builder.Services.ConfigureHttpCacheHeaders();
         builder.Services.AddMemoryCache();
+        builder.Services.ConfigureRateLimitingOptions();
+        builder.Services.AddHttpContextAccessor();
 
         var app = builder.Build();
 
@@ -71,6 +75,7 @@ internal class Program
 
         app.UseHttpsRedirection();
 
+        app.UseIpRateLimiting();
         app.UseCors("CorsPolicy");
         app.UseResponseCaching();
         app.UseHttpCacheHeaders();
