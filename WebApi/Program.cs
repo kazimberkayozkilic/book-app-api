@@ -56,6 +56,8 @@ internal class Program
         builder.Services.AddMemoryCache();
         builder.Services.ConfigureRateLimitingOptions();
         builder.Services.AddHttpContextAccessor();
+        builder.Services.AddAuthentication();
+        builder.Services.ConfigureIdentity();
 
         var app = builder.Build();
 
@@ -80,7 +82,7 @@ internal class Program
         app.UseResponseCaching();
         app.UseHttpCacheHeaders();
 
-
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapControllers();
