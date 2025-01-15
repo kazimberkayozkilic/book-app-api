@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApi.Migrations
 {
-    public partial class İnit : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -171,19 +171,24 @@ namespace WebApi.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Books",
-                columns: new[] { "Id", "Price", "Title" },
-                values: new object[] { 1, 15m, "Book 1" });
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "76de8a6d-4a82-47f2-a936-4355c87667f6", "cca248ac-27b2-45ed-8ba9-f648f83d6201", "Editör", "EDITOR" },
+                    { "a390e1e2-2b4d-49fd-bf04-858cf0b9c7fc", "3cc25609-b94b-4746-9f4f-c687a4860ca1", "User", "USER" },
+                    { "eed9ff09-2374-44d1-bd28-c4d4987bc8c9", "2c584cc2-c9d8-4a29-b845-f9b5a2ddfee4", "Admin", "ADMIN" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Books",
                 columns: new[] { "Id", "Price", "Title" },
-                values: new object[] { 2, 18m, "Book 2" });
-
-            migrationBuilder.InsertData(
-                table: "Books",
-                columns: new[] { "Id", "Price", "Title" },
-                values: new object[] { 3, 11m, "Book 3" });
+                values: new object[,]
+                {
+                    { 1, 15m, "Book 1" },
+                    { 2, 18m, "Book 2" },
+                    { 3, 11m, "Book 3" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

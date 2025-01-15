@@ -12,8 +12,8 @@ using Repositories.EFCore;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20250115190312_İnit")]
-    partial class İnit
+    [Migration("20250115215944_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -160,6 +160,29 @@ namespace WebApi.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "a390e1e2-2b4d-49fd-bf04-858cf0b9c7fc",
+                            ConcurrencyStamp = "3cc25609-b94b-4746-9f4f-c687a4860ca1",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "eed9ff09-2374-44d1-bd28-c4d4987bc8c9",
+                            ConcurrencyStamp = "2c584cc2-c9d8-4a29-b845-f9b5a2ddfee4",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "76de8a6d-4a82-47f2-a936-4355c87667f6",
+                            ConcurrencyStamp = "cca248ac-27b2-45ed-8ba9-f648f83d6201",
+                            Name = "Editör",
+                            NormalizedName = "EDITOR"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
