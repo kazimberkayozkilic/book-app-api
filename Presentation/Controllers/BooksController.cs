@@ -30,6 +30,7 @@ namespace Presentation.Controllers
             _manager = manager;
         }
 
+        [Authorize(Roles = "User")]
         [HttpHead]
         [HttpGet (Name = "GetAllBooksAsync")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
@@ -46,6 +47,7 @@ namespace Presentation.Controllers
             return result.linkResponse.HasLinks ? Ok(result.linkResponse.LinkedEntities) : Ok(result.linkResponse.ShapedEntities);
         }
 
+        [Authorize(Roles = "Admin, Editor")]
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetOneBookAsync([FromRoute(Name = "id")] int id)
         {
@@ -55,6 +57,7 @@ namespace Presentation.Controllers
 
         }
 
+        [Authorize(Roles = "Admin, Editor")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPost(Name = "CreateOneBookAsync")]
         public async Task<IActionResult> CreateOneBookAsync([FromBody] BookDtoForInsertion bookDto)
@@ -65,6 +68,7 @@ namespace Presentation.Controllers
 
         }
 
+        [Authorize(Roles = "Admin, Editor")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPut("{id:int}")]
         public async Task<IActionResult> UpdateOneBookAsync([FromRoute(Name = "id")] int id, [FromBody] BookDtoForUpdate bookDto)
@@ -73,6 +77,7 @@ namespace Presentation.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = "Admin, Editor")]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteOneBookAsync([FromRoute(Name = "id")] int id)
         {
@@ -80,6 +85,7 @@ namespace Presentation.Controllers
             return NoContent(); //204
         }
 
+        
         [HttpOptions]
         public IActionResult GetBooksOptions()
         {
