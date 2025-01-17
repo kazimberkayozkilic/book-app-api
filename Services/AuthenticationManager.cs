@@ -28,6 +28,11 @@ namespace Services
             _configuration = configuration;
         }
 
+        public Task<string> CreateToken()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IdentityResult> RegisterUser(UserForRegistrationDto userForRegistrationDto)
         {
             var user = _mapper.Map<User>(userForRegistrationDto);
