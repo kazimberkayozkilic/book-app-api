@@ -50,8 +50,3 @@ This project is divided into the following layers, each with specific responsibi
 - **NLog.Extensions.Logging 5.3.15**: Integration of NLog for logging and error tracking.
 - **System.IdentityModel.Tokens.Jwt 6.14.1**: JWT support for authentication and authorization.
 
-## Installation
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/username/repository-name.git
