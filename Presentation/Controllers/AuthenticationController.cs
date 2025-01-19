@@ -40,12 +40,20 @@ namespace Presentation.Controllers
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
         {
-            if(!await _service.AuthenticationService.ValidateUser(user))
+            if (!await _service.AuthenticationService.ValidateUser(user))
             {
                 return Unauthorized();
             }
-           var tokenDto = await _service.AuthenticationService.CreateToken(true);
-           return Ok(tokenDto);
+            var tokenDto = await _service.AuthenticationService.CreateToken(true);
+            return Ok(tokenDto);
+        }
+
+        [HttpPost("refresh")]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
+        public async Task<IActionResult> GetRefreshToken([FromBody] TokenDto tokenDto)
+        {
+            var token = await _service.AuthenticationService.RefreshToken(tokenDto);
+            return Ok(token);
         }
     }
 }
