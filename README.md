@@ -46,6 +46,10 @@ This project is divided into the following layers, each with specific responsibi
 - **Microsoft.Extensions.Configuration 8.0.0**: Configures application settings and environment variables.
 - **System.Linq.Dynamic.Core 1.5.1**: Enables dynamic LINQ queries for advanced filtering and sorting.
 - **AutoMapper.Extensions.Microsoft.DependencyInjection 12.0.1**: Integration of AutoMapper with Microsoft Dependency Injection.
+- **Microsoft.AspNetCore.JsonPatch 9.0.0**: Support for the JSON Patch format, allowing partial updates to resources.
+- **NLog.Extensions.Logging 5.3.15**: Integration of NLog for logging and error tracking.
+- **System.IdentityModel.Tokens.Jwt 6.14.1**: JWT support for authentication and authorization.
+
 
 - # Using the Repository
 
@@ -54,8 +58,3 @@ You can use Git to clone the repository to your computer: `git clone `
 Each section is organized within its own branch on Git. To view all branches in the repository, use the following command: `git branch -a`  
 
 To switch from one branch to another, use the following command: `git checkout <branch_name>`
-
-- **Microsoft.AspNetCore.JsonPatch 9.0.0**: Support for the JSON Patch format, allowing partial updates to resources.
-- **NLog.Extensions.Logging 5.3.15**: Integration of NLog for logging and error tracking.
-- **System.IdentityModel.Tokens.Jwt 6.14.1**: JWT support for authentication and authorization.
-
